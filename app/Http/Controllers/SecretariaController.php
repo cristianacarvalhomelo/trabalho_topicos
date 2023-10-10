@@ -12,9 +12,9 @@ class SecretariaController extends Controller
      */
     public function index()
     {
-        $secretaria = Secretaria::all();
+        $secretarias = Secretaria::all();
 
-        return view('secretarias.index', compact('secretaria'));
+        return view('secretarias.index', compact('secretarias'));
     }
 
     /**

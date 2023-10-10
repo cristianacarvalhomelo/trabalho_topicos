@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Secretaria extends Model
 {
-    protected $table = 'secretaria';
+    protected $table = 'secretarias';
     protected $fillable = ['nome', 'cpf', 'email', 'senha'];
 }

@@ -11,16 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('consulta', function (Blueprint $table) {
+        Schema::create('exames', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_paciente');
-            $table->unsignedBigInteger('id_medico');
-            $table->string('hora');
+            $table->string('tipo_exame');
+            $table->string('resultado_exame');
             $table->rememberToken();
             $table->timestamps();
             
-            $table->foreign('id_paciente')->references('id')->on('paciente');
-            $table->foreign('id_medico')->references('id')->on('medico');
+            $table->foreign('id_paciente')->references('id')->on('pacientes');
         });
     }
 

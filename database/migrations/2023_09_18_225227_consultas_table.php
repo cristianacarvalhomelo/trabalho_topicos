@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('medico', function (Blueprint $table) {
+        Schema::create('consultas', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('cargo');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->integer('cpf');
+            $table->unsignedBigInteger('id_paciente');
+            $table->unsignedBigInteger('id_medico');
+            $table->string('hora');
             $table->rememberToken();
             $table->timestamps();
+            
+            $table->foreign('id_paciente')->references('id')->on('pacientes');
+            $table->foreign('id_medico')->references('id')->on('medicos');
         });
     }
 
