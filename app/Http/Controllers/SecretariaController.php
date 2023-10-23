@@ -45,32 +45,53 @@ class SecretariaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        // Encontra um autor no banco de dados com o ID fornecido
+        $secretaria = Secretaria::findOrFail($id);
+        // Retorna a view 'autores.show' e passa o autor como parâmetro
+        return view('secretarias.show', compact('secretaria'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        // Encontra um autor no banco de dados com o ID fornecido
+        $secretaria = Secretaria::findOrFail($id);
+        // Retorna a view 'autores.edit' e passa o autor como parâmetro
+        return view('secretarias.edit', compact('secretaria'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        // Encontra um autor no banco de dados com o ID fornecido
+        $secretaria = Secretaria::findOrFail($id);
+        // Atualiza os campos do autor com os dados fornecidos no request
+        $secretaria->nome = $request->input('nome');
+        $secretaria->email = $request->input('email');
+        $secretaria->senha = $request->input('senha');
+        $secretaria->cpf = $request->input('cpf');
+        // Salva as alterações no autor
+        $secretaria->save();
+        // Redireciona para a rota 'autores.index' após salvar
+        return redirect()->route('secretarias.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        // Encontra um autor no banco de dados com o ID fornecido
+        $secretaria = Secretaria::findOrFail($id);
+        // Exclui o autor do banco de dados
+        $secretaria->delete();
+        // Redireciona para a rota 'autores.index' após excluir
+        return redirect()->route('secretarias.index');
     }
 }
