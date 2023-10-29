@@ -54,16 +54,16 @@
                 @csrf
                 @method('PUT')
                 <div class="form-group">
-                    <label for="nome">Nome:</label>
-                    <input type="text" name="nome" value="{{ $secretaria->nome }}">
+                    <label for="name">Nome:</label>
+                    <input type="text" name="name" value="{{ $secretaria->name }}">
                 </div>
                 <div class="form-group">
                     <label for="email">E-mail:</label>
                     <input type="email" name="email" value="{{ $secretaria->email }}">
                 </div>
                 <div class="form-group">
-                    <label for="senha">Senha:</label>
-                    <input type="password" name="senha" value="{{ $secretaria->senha }}">
+                    <label for="password">Senha:</label>
+                    <input type="password" name="password" value="{{ $secretaria->password }}">
                 </div>
                 <div class="form-group">
                     <label for="cpf">CPF:</label>

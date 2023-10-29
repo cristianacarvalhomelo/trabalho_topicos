@@ -31,15 +31,15 @@ class SecretariaController extends Controller
     public function store(Request $request)
     {
         $secretaria = new Secretaria([
-            'nome' => $request->input('nome'),
+            'name' => $request->input('name'),
             'cpf' => $request->input('cpf'),
             'email' => $request->input('email'),
-            'senha' => $request->input('senha')
+            'password' => $request->input('password')
         ]);
 
         $secretaria->save();
         
-        return redirect()->route('secretarias.index');
+        return redirect()->route('secretarias.create');
     } 
 
     /**
@@ -72,9 +72,9 @@ class SecretariaController extends Controller
         // Encontra um autor no banco de dados com o ID fornecido
         $secretaria = Secretaria::findOrFail($id);
         // Atualiza os campos do autor com os dados fornecidos no request
-        $secretaria->nome = $request->input('nome');
+        $secretaria->name = $request->input('name');
         $secretaria->email = $request->input('email');
-        $secretaria->senha = $request->input('senha');
+        $secretaria->password = $request->input('password');
         $secretaria->cpf = $request->input('cpf');
         // Salva as alterações no autor
         $secretaria->save();

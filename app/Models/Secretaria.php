@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 use Illuminate\Database\Eloquent\Model;
 
 class Secretaria extends Model
 {
     protected $table = 'secretarias';
-    protected $fillable = ['nome', 'cpf', 'email', 'senha'];
+    protected $fillable = ['name', 'cpf', 'email', 'password'];
 }

@@ -18,9 +18,9 @@
                 @foreach ($secretarias as $secretaria)
                     <tr>
                         <td class="colunas">{{ $secretaria->id }}</td>
-                        <td id="nome">{{ $secretaria->nome }}</td>
+                        <td id="name">{{ $secretaria->name }}</td>
                         <td class="colunas">{{ $secretaria->email }}</td>
-                        <td>{{ $secretaria->senha }}</td>
+                        <td>{{ $secretaria->password }}</td>
                         <td>{{ $secretaria->cpf }}</td>
                         <td>
                             <a href="{{ route('secretarias.show', $secretaria->id) }}" class="btn btn-info">Detalhes</a>
