@@ -54,7 +54,7 @@
                 @csrf
                 <div class="form-group">
                     <label for="name">Nome:</label>
-                    <input type="text" name="name">
+                    <input type="text" name="name" required>
                 </div>
                 <div class="form-group">
                     <label for="cpf">CPF:</label>
