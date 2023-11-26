@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SecretariaController;
+use App\Http\Controllers\MedicoController;
 use Illuminate\Support\Facades\Route;
 
 /*

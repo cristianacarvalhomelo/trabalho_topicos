@@ -65,7 +65,7 @@
                     <input type="email" name="email">
                 </div>
                 <div class="form-group">
-                    <label for="password">Password:</label>
+                    <label for="password">Senha:</label>
                     <input type="password" name="password">
                 </div>
                 <button type="submit" class="btn btn-success">Salvar</button>

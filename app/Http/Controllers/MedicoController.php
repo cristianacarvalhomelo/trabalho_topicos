@@ -31,16 +31,16 @@ class MedicoController extends Controller
     public function store(Request $request)
     {
         $medico = new Medico([
-            'nome' => $request->input('nome'),
+            'name' => $request->input('name'),
             'cpf' => $request->input('cpf'),
             'cargo' => $request->input('cargo'),
             'email' => $request->input('email'),
-            'senha' => $request->input('senha')
+            'password' => $request->input('password')
         ]);
 
         $medico->save();
         
-        return redirect()->route('medicos.index');
+        return redirect()->route('medicos.create');
     }
 
     /**
@@ -48,7 +48,10 @@ class MedicoController extends Controller
      */
     public function show(string $id)
     {
-        //
+         // Encontra um autor no banco de dados com o ID fornecido
+         $medico = Medico::findOrFail($id);
+         // Retorna a view 'autores.show' e passa o autor como parâmetro
+         return view('medicos.show', compact('medico'));
     }
 
     /**
@@ -56,7 +59,10 @@ class MedicoController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        // Encontra um autor no banco de dados com o ID fornecido
+        $medico = Medico::findOrFail($id);
+        // Retorna a view 'autores.edit' e passa o autor como parâmetro
+        return view('medicos.edit', compact('medico'));
     }
 
     /**
@@ -64,7 +70,18 @@ class MedicoController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+         // Encontra um autor no banco de dados com o ID fornecido
+         $medico = Medico::findOrFail($id);
+         // Atualiza os campos do autor com os dados fornecidos no request
+         $medico->name = $request->input('name');
+         $medico->email = $request->input('email');
+         $medico->password = $request->input('password');
+         $medico->cpf = $request->input('cpf');
+         $medico->cargo = $request->input('cargo');
+         // Salva as alterações no autor
+         $medico->save();
+         // Redireciona para a rota 'autores.index' após salvar
+         return redirect()->route('medicos.index');
     }
 
     /**
@@ -72,6 +89,11 @@ class MedicoController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+         // Encontra um autor no banco de dados com o ID fornecido
+         $medico = Medico::findOrFail($id);
+         // Exclui o autor do banco de dados
+         $medico->delete();
+         // Redireciona para a rota 'autores.index' após excluir
+         return redirect()->route('medicos.index');
     }
 }
