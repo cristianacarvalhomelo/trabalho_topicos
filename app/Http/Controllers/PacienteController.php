@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Paciente;
+use App\Models\Medico;
 use Illuminate\Http\Request;
 
 class PacienteController extends Controller
@@ -22,7 +23,8 @@ class PacienteController extends Controller
      */
     public function create()
     {
-        return view('pacientes.create');
+        $medicos = Medico::all();
+        return view('pacientes.create', compact('medicos'));
     }
 
     /**
@@ -31,12 +33,13 @@ class PacienteController extends Controller
     public function store(Request $request)
     {
         $paciente = new Paciente([
-            'nome' => $request->input('nome'),
+            'name' => $request->input('name'),
             'endereco' => $request->input('endereco'),
             'telefone' => $request->input('telefone'),
             'cpf' => $request->input('cpf'),
             'email' => $request->input('email'),
-            'senha' => $request->input('senha')
+            'password' => $request->input('password'),
+            'id_medico' => $request->input('id_medico')
         ]);
 
         $paciente->save();
@@ -49,7 +52,10 @@ class PacienteController extends Controller
      */
     public function show(string $id)
     {
-        //
+        // Encontra um autor no banco de dados com o ID fornecido
+        $paciente = Paciente::findOrFail($id);
+        // Retorna a view 'autores.show' e passa o autor como parâmetro
+        return view('pacientes.show', compact('paciente'));
     }
 
     /**
@@ -57,7 +63,12 @@ class PacienteController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        // Encontra um autor no banco de dados com o ID fornecido
+        $paciente = Paciente::findOrFail($id);
+        // Retorna a view 'autores.edit' e passa o autor como parâmetro
+        $medicos = Medico::all();
+
+        return view('pacientes.edit', compact('paciente', 'medicos'));
     }
 
     /**
@@ -65,7 +76,21 @@ class PacienteController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+         // Encontra um autor no banco de dados com o ID fornecido
+         $paciente = Paciente::findOrFail($id);
+         // Atualiza os campos do autor com os dados fornecidos no request
+         $paciente->name = $request->input('name');
+         $paciente->cpf = $request->input('cpf');
+         $paciente->endereco = $request->input('endereco');
+         $paciente->telefone = $request->input('telefone');
+         $paciente->email = $request->input('email');
+         $paciente->password = $request->input('password');
+         $paciente->id_medico = $request->input('id_medico');
+ 
+         // Salva as alterações no autor
+         $paciente->update();
+         // Redireciona para a rota 'autores.index' após salvar
+         return redirect()->route('pacientes.index');
     }
 
     /**
@@ -73,6 +98,11 @@ class PacienteController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+         // Encontra um autor no banco de dados com o ID fornecido
+         $paciente = Paciente::findOrFail($id);
+         // Exclui o autor do banco de dados
+         $paciente->delete();
+         // Redireciona para a rota 'autores.index' após excluir
+         return redirect()->route('pacientes.index');
     }
 }

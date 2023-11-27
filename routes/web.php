@@ -3,6 +3,9 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SecretariaController;
 use App\Http\Controllers\MedicoController;
+use App\Http\Controllers\PacienteController;
+use App\Http\Controllers\ConsultaController;
+use App\Http\Controllers\ExameController;
 use Illuminate\Support\Facades\Route;
 
 /*
