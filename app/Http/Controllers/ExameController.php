@@ -11,9 +11,13 @@ class ExameController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $exames = Exame::all();
+        $search = $request->input('search');
+        $exames = Exame::where('tipo', 'like', '%'.$search.'%')
+                         ->orWhere('resultado', 'like', '%'.$search.'%')
+                         ->orWhere('id_paciente', 'like', '%'.$search.'%')
+                         ->paginate(10);
 
         return view('exames.index', compact('exames'));
     }

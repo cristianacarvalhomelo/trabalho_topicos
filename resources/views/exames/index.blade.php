@@ -1,6 +1,13 @@
 <x-app-layout>
     <link rel="stylesheet" href="{{ asset('css/exames/index.css') }}">
     <div class="container">
+        <form action="{{ route('exames.index') }}" method="GET" class="search-form">
+            <div class="search-container">
+                <input type="text" name="search" placeholder="Pesquisar exames..." value="{{ request()->query('search') }}" class="search-input">
+                <button type="submit" class="search-button">Pesquisar</button>
+            </div>
+        </form>
+    <div class="container">
         {{-- <h1>Lista de Exames</h1> --}}
         <br>
         <a href="{{ route('exames.create') }}" class="btn btn-primary">Novo Exame</a>
