@@ -34,15 +34,20 @@ class ConsultaController extends Controller
      */
     public function store(Request $request)
     {
-        $consulta = new Consulta([
-            'hora' => $request->input('hora'),
-            'id_paciente' => $request->input('id_paciente'),
-            'id_medico' => $request->input('id_medico')
-        ]);
+        $messages = [
+            'id_paciente.required' => 'É necessário preencher o campo paciente.',
+            'id_medico.required'  => 'É necessário preencher o campo médico.',
+        ];
 
-        $consulta->save();
-        
-        return redirect()->route('consultas.index');
+        $request->validate([
+            'hora' => 'required|date',
+            'id_paciente' => 'required|exists:pacientes,id',
+            'id_medico' => 'required|exists:medicos,id'
+        ],$messages);
+
+        Consulta::create($request->all());
+
+        return redirect()->route('consultas.index')->with('success', 'Consulta criada com sucesso!');
     }
 
     /**
